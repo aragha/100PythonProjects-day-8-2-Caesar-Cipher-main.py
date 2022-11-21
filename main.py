@@ -1,19 +1,16 @@
-
+alphaforward = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+alphareverse = 'zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba'
 def encrypt(alphabets, encdec, inputtext, shiftrequired):
   assert len(alphabets) > 26 and encdec != '' and inputtext != '' 
   resulttext = ''
-  if encdec == 'encode':
-    for i in range(0, len(inputtext)):
-      resulttext += alphabets[alphabets.index(inputtext[i]) + shiftrequired]
+  # if encdec == 'encode':
+  for i in range(0, len(inputtext)):
+    resulttext += alphabets[alphabets.index(inputtext[i]) + shiftrequired]
   return(resulttext)
 
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-al = []
-for i in range(0, 3):
-  al += alphabet
-alphabet = al  
 
-# al = alphabet + alphabet
+alphabet = list(alphaforward)
+alphabetreversed = list(alphareverse)
 direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
@@ -33,5 +30,8 @@ shift = int(input("Type the shift number:\n"))
     ##🐛Bug alert: What happens if you try to encode the word 'civilization'?🐛
 
 #TODO-3: Call the encrypt function and pass in the user inputs. You should be able to test the code and encrypt a message. 
-result = encrypt(alphabet, direction, text, shift)
+if direction == 'encode':
+  result = encrypt(alphabet, direction, text, shift)
+else:
+  result = encrypt(alphabetreversed, direction, text, shift)
 print(result)
